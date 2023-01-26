@@ -1,7 +1,5 @@
 const express = require("express");
 const multer = require("multer");
-const { createPostfix } = require("typescript");
-const { countDocuments } = require("../models/post");
 
 const Post = require("../models/post");
 const checkAuth = require("../middleware/check-auth");
@@ -44,7 +42,7 @@ router.post(
     });
     post.save().then((createdPost) => {
       res.status(201).json({
-        message: "Post added successfully!",
+        message: "Post added successfully",
         post: {
           ...createdPost,
           id: createdPost._id,
@@ -76,9 +74,9 @@ router.put(
       post
     ).then((result) => {
       if (result.modifiedCount > 0) {
-        res.status(200).json({ message: "Update successful" });
+        res.status(200).json({ message: "Update successful!" });
       } else {
-        res.status(401).json({ message: "Not authorized" });
+        res.status(401).json({ message: "Not authorized!" });
       }
     });
   }
@@ -111,7 +109,7 @@ router.get("/:id", (req, res, next) => {
     if (post) {
       res.status(200).json(post);
     } else {
-      res.status(404).json({ message: "Post not found" });
+      res.status(404).json({ message: "Post not found!" });
     }
   });
 });
@@ -119,10 +117,11 @@ router.get("/:id", (req, res, next) => {
 router.delete("/:id", checkAuth, (req, res, next) => {
   Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(
     (result) => {
+      console.log(result);
       if (result.deletedCount > 0) {
-        res.status(200).json({ message: "Post deleted!" });
+        res.status(200).json({ message: "Deletion successful!" });
       } else {
-        res.status(401).json({ message: "Not authorized" });
+        res.status(401).json({ message: "Not authorized!" });
       }
     }
   );

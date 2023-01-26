@@ -13,10 +13,10 @@ mongoose
     "mongodb+srv://kathy:E0MTgNQZqWszKTk3@cluster0.rdogxwr.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => {
-    console.log("Connected to DB");
+    console.log("Connected to database!");
   })
   .catch(() => {
-    console.log("Connection failed");
+    console.log("Connection failed!");
   });
 
 app.use(bodyParser.json());
@@ -31,7 +31,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
   next();
 });
